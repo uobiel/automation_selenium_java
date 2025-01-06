@@ -2,14 +2,8 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
-
-public class LoginPage {
-
-    private WebDriver driver;
+public class LoginPage extends BasePage {
 
     private By campoUsuario = By.id("user-name");
     private By campoSenha = By.id("password");
@@ -18,34 +12,32 @@ public class LoginPage {
     private By paginaProdutos = By.className("title");
 
     public LoginPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     public void digitarUsuario(String username) {
-        driver.findElement(campoUsuario).sendKeys(username);
+        type(campoUsuario, username);
     }
 
     public void digitarSenha(String password) {
-        driver.findElement(campoSenha).sendKeys(password);
+        type(campoSenha, password);
     }
 
     public void clicarBotaoLogin() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.elementToBeClickable(botaoLogin));
-
-        driver.findElement(botaoLogin).click();
+        click(botaoLogin);
     }
 
     public void fazerLogin(String username, String password) {
         digitarUsuario(username);
         digitarSenha(password);
+        clicarBotaoLogin();
     }
 
     public boolean isMensagemErroExibida() {
-        return driver.findElement(mensagemErro).isDisplayed();
+        return find(mensagemErro).isDisplayed();
     }
 
     public boolean isPaginaDeProdutosExibida() {
-        return driver.findElement(paginaProdutos).isDisplayed();
+        return find(paginaProdutos).isDisplayed();
     }
 }
