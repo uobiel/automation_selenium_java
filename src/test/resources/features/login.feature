@@ -11,3 +11,9 @@ Feature: Login no Swag Labs
     When eu insiro o usuário "fake_user" e a senha "wrong_password"
     And clico no botão de login
     Then devo ver uma mensagem de erro
+
+  Scenario: Login com dados em branco
+    Given que estou na página de login do Swag Labs
+    When eu não insiro usuário e senha
+    And clico no botão de login
+    Then devo ver uma mensagem de erro

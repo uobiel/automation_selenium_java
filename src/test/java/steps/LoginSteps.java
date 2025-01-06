@@ -37,8 +37,16 @@ public class LoginSteps extends BaseTest {
         assertTrue(loginPage.isMensagemErroExibida(), "A mensagem de erro não foi exibida.");
     }
 
+    @When("eu não insiro usuário e senha")
+    public void euNãoInsiroUsuárioESenha() {
+        loginPage.digitarUsuario("");
+        loginPage.digitarSenha("");
+    }
+
     @After
     public void finalizarDriver() {
         BaseTest.quitDriver();
     }
+
+
 }
